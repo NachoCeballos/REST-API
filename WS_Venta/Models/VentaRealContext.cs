@@ -7,6 +7,7 @@ namespace WS_Venta.Models
 {
     public partial class VentaRealContext : DbContext
     {
+        configDB configDB = new configDB();
         public VentaRealContext()
         {
         }
@@ -16,6 +17,7 @@ namespace WS_Venta.Models
         {
         }
 
+        
         public virtual DbSet<Cliente> Clientes { get; set; } = null!;
         public virtual DbSet<Concepto> Conceptos { get; set; } = null!;
         public virtual DbSet<Producto> Productos { get; set; } = null!;
@@ -25,8 +27,7 @@ namespace WS_Venta.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=MIPC\\SQLEXPRESS;Database=VentaReal;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer(configDB.SQLURI);
             }
         }
 
